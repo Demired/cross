@@ -8,6 +8,11 @@
 
 可以将此文件放入系统的bin目录下，快速启动
 
+```sh
+chmod +x build.py
+mv build.py /usr/local/bin/cross
+```
+
 ### 推荐
 
 ```sh
