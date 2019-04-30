@@ -13,14 +13,14 @@ chmod +x build.py
 mv build.py /usr/local/bin/cross
 ```
 
-### 推荐
+### 推荐使用方法
 
 ```sh
-build.py
+cross
 ```
 
-### 高级
+### 高级使用方法
 
 ```sh
-build.py -v <golangversion> --GOOS=<os> --GOARCH=<goarch>
+cross -v <golangversion> --GOOS=<os> --GOARCH=<goarch>
 ```
