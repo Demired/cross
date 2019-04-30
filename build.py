@@ -46,11 +46,11 @@ class build():
         try:
             opts, _ = getopt.getopt(sys.argv[1:],"hv:",["golangVersion=","GOOS=","GOARCH="])
         except getopt.GetoptError:
-            print('build.py -v <golangversion> --GOOS=<os> --GOARCH=<goarch>')
+            print('build.py -v <golangversion> --GOOS=<goos> --GOARCH=<goarch>')
             sys.exit(2)
         for opt, arg in opts:
             if opt == '-h':
-                print('build.py -v <golangversion> --GOOS=<os> --GOARCH=<goarch>')
+                print('build.py -v <golangversion> --GOOS=<goos> --GOARCH=<goarch>')
                 sys.exit()
             elif opt in ("-v", "--golangVersion"):
                 verison = arg

@@ -22,5 +22,5 @@ cross
 ### 高级使用方法
 
 ```sh
-cross -v <golangversion> --GOOS=<os> --GOARCH=<goarch>
+cross -v <golangversion> --GOOS=<goos> --GOARCH=<goarch>
 ```
