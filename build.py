@@ -13,7 +13,6 @@ class build():
             b = '%s -v %s:%s'%(b,path,path)
         cmd = '%s %s \'%s\''%(b,o,e)
         print(cmd)
-        print(c)
         os.system(cmd)
     
     def getGOARCH(self):
