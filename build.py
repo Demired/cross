@@ -2,7 +2,13 @@
 import os,re,sys,getopt
 
 class build():
+    GOVersion = ''
+    GOOS = ''
+    GOARCH = ''
     def __init__(self):
+        self.arg()
+
+    def run(self):
         b = "docker run --rm"
         goPath = self.getGoVersion()
         o = 'golang:%s bash -c'%(goPath) 
@@ -16,21 +22,18 @@ class build():
         os.system(cmd)
     
     def getGOARCH(self):
-        _,_,arch = self.arg()
-        if arch != "":
-            return arch
+        if self.GOARCH != "":
+            return self.GOARCH
         return "amd64"
 
     def getGOOS(self):
-        _,goos,_ = self.arg()
-        if goos != "":
-            return goos
+        if self.GOOS != "":
+            return self.GOOS
         return "linux"
 
     def getGoVersion(self):
-        version,_,_ = self.arg()
-        if version != "":
-            return version
+        if self.GOVersion != "":
+            return self.GOVersion
         output = os.popen('go version')
         pattern = re.compile(r'\d+\.\d+\.\d+')
         m = pattern.findall(output.read())
@@ -39,25 +42,23 @@ class build():
                 return  m[0]
 
     def arg(self):
-        verison = ''
-        GOOS = ''
-        GOARCH = ''
         try:
-            opts, _ = getopt.getopt(sys.argv[1:],"hv:",["golangVersion=","GOOS=","GOARCH="])
+            opts, _ = getopt.getopt(sys.argv[1:],"h",["GOVersion=","GOOS=","GOARCH="])
         except getopt.GetoptError:
-            print('build.py -v <golangversion> --GOOS=<goos> --GOARCH=<goarch>')
+            print('build.py --GOVersion=<goversion> --GOOS=<goos> --GOARCH=<goarch>')
             sys.exit(2)
         for opt, arg in opts:
             if opt == '-h':
-                print('build.py -v <golangversion> --GOOS=<goos> --GOARCH=<goarch>')
+                print('build.py --GOVersion=<goversion> --GOOS=<goos> --GOARCH=<goarch>')
                 sys.exit()
-            elif opt in ("-v", "--golangVersion"):
-                verison = arg
+            elif opt in ("--GOVersion"):
+                self.GOVersion = arg
             elif opt in ("--GOOS"):
-                GOOS = arg
+                self.GOOS = arg
             elif opt in ("--GOARCH"):
-                GOARCH = arg
-        return verison,GOOS,GOARCH
+                self.GOARCH = arg
+        # return verison,GOOS,GOARCH
 
 if __name__ == "__main__":
     b = build()
+    b.run()
